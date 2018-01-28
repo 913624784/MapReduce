@@ -19,6 +19,6 @@ public class Test {
             }
         }
       for(String ss:xml)
-          System.out.println(ss);
+          System.out.println(ss+"");
     }
 }
