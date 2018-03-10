@@ -5,7 +5,6 @@ import WordCount.WordCountTopN;
 import WordCount.WordTimes;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
-
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -15,19 +14,18 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TopN {
     public static class Formapper extends Mapper<LongWritable,Text, WordTimes,NullWritable>{
-        private List<WordTimes> list=new ArrayList();
+        private List<WordTimes> list=new ArrayList<>();
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String line=value.toString();
             String str[] =line.split("\t");
             WordTimes wordTimes=new WordTimes(str[0],Integer.parseInt(str[1]));
             list.add(wordTimes);
-            Collections.sort(list);
+            //Collections.sort(list);
         }
         @Override
         protected void cleanup(Context context) throws IOException, InterruptedException {
