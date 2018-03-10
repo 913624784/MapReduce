@@ -23,6 +23,7 @@ public class TestFS {
         //DFS[DFSClient[clientName=DFSClient_NONMAPREDUCE_1162416679_1, ugi=qzw (auth:SIMPLE)]]
    }
    @Test
+   //在HDFS根目录下创建一个文件夹
    public void testmkdir() throws IOException {
           fs.mkdirs(new Path("/forcl2"));
    }
@@ -90,12 +91,13 @@ public class TestFS {
     //输出当前hdfs中所有用户的IP和端口信息
     public void testDS() throws IOException {
         DistributedFileSystem ds = (DistributedFileSystem) fs;
-        DatanodeInfo[] dis = ds.getDataNodeStats();
+        DatanodeInfo[] dis = ds.getDataNodeStats();//获得所有datanode的节点状态
         for (DatanodeInfo di : dis) {
             System.out.println(di);
         }
     }
     @Test
+    //小文件的合并
     public void copy() throws IOException {
         FileUtil.copyMerge(fs,new Path("/date"),fs,new Path("/ddfile"),false,new Configuration(),"");
     }
