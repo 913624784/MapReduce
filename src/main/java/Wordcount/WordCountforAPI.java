@@ -1,4 +1,4 @@
-package WordCount;
+package Wordcount;
 
 import Util.JobUtil;
 import org.apache.hadoop.io.IntWritable;
@@ -58,7 +58,7 @@ public class WordCountforAPI {
             ClearOutPut.clear(path);
             FileOutputFormat.setOutputPath(job,new Path(path));
             job.waitForCompletion(true);*/
-            JobUtil.commitJob(WordCountforAPI.class,"E:\\Api.txt","");
+            JobUtil.commitJob(WordCountforAPI.class,"E:\\forTestData\\javaApi","");
 
         }
 

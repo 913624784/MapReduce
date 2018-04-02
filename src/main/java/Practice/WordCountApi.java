@@ -23,7 +23,7 @@ public class WordCountApi {
             Pattern pattern=Pattern.compile("\\w+");
             Matcher matcher=pattern.matcher(line);
             while (matcher.find()){
-                String word=matcher.group();
+                String word=matcher.group();//相当于substring从头到尾
                 okey.set(word);
                 context.write(okey, NullWritable.get());
             }

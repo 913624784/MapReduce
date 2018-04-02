@@ -1,12 +1,10 @@
-package WordCount;
+package Wordcount;
 
 import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class WordTimes implements WritableComparable<WordTimes> {//自定义序列化和比较器
     private String word="";
@@ -45,13 +43,6 @@ public class WordTimes implements WritableComparable<WordTimes> {//自定义序�
                 '}';
     }
 
-    public static void main(String[] args) {
-        Set<WordTimes> set=new TreeSet();
-        set.add(new WordTimes("c",20));
-        set.add(new WordTimes("a",1));
-        set.add(new WordTimes("d",4));
-        set.add(new WordTimes("b",2));
-        System.out.println(set);
-    }
+
 }
 

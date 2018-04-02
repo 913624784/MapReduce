@@ -1,8 +1,8 @@
 package Practice;
 
 import Util.ClearOutPut;
-import WordCount.WordCountTopN;
-import WordCount.WordTimes;
+import Wordcount.WordCountTopN;
+import Wordcount.WordTimes;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;

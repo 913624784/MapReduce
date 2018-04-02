@@ -1,4 +1,4 @@
-package WordCount;
+package Wordcount;
 
 
 import Util.ClearOutPut;
