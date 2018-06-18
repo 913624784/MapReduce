@@ -41,8 +41,8 @@ public class WordCount {
      * @param (args 0 input  1 output)*path
      */
         public static void main(String[] args) {
-          // JobUtil.commitJob(WordCount.class,"E:\\forTestData\\forWordCount","");
-            JobUtil.commitJob(WordCount.class,args[0],args[1]);
+          JobUtil.commitJob(WordCount.class,"E:\\forTestData\\forWordCount","");
+            //JobUtil.commitJob(WordCount.class,args[0],args[1]);
 
 
         }

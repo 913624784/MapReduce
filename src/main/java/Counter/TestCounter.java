@@ -12,17 +12,18 @@ public class TestCounter {
     public static class Formapper extends Mapper<LongWritable,Text,Text,Text> {
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-            //组 和 名
+            //定义两个计数器 一个记录敏感词 组 和 名
             Counter  sensitiveWord=context.getCounter("oracle","senWord");
             Counter  notNumber=context.getCounter("oracle","not number");
             String line=value.toString();//统计每一行
             if(line.contains("the")){//含有the
                 sensitiveWord.increment(1L);//sensitiveWord计数器加一
             }
+            //编写一个枚举类 用枚举当计数器
             Counter lineNum= context.getCounter(LineCounter.NUM);//用枚举统计api中的行号
             lineNum.increment(1L);
             try {
-                Integer.parseInt(line);//api中没有int 肯定为行数
+                Integer.parseInt(line);//api中没有数字 相当于统计行数
             }catch (NumberFormatException e){
                 notNumber.increment(1L);//notNumber计数器加一
             }

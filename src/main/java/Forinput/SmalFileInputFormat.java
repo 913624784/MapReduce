@@ -14,12 +14,12 @@ import java.io.IOException;
 
 public class SmalFileInputFormat extends CombineFileInputFormat<Text,Text> {
 
-    @Override
+    @Override//修改为false 取消默认分片规则
     protected boolean isSplitable(JobContext context, Path file) {
         return false;
     }
 
-    @Override
+    @Override//重写createRecordReader方法 用一个类继承RecordReader 返回他
     public RecordReader<Text, Text> createRecordReader(InputSplit split, TaskAttemptContext context) throws IOException {
         return new CombineFileRecordReader((CombineFileSplit) split,context,SmalRecordReader.class);
     }

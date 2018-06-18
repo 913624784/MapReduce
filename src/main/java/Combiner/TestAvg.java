@@ -17,15 +17,15 @@ public class TestAvg {
        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
            String line=value.toString();
            String [] strs=line.split(" ");
-           okey.set(strs[0]);
+           okey.set(strs[0]);//日期
            //设置实体
            avgEntity.setCount(1);//count为都为1
-           avgEntity.setSum(Integer.parseInt(strs[1]));
+           avgEntity.setSum(Integer.parseInt(strs[1]));//温度
            //写入
            context.write(okey,avgEntity);
        }
    }
-
+    //设置一个combiner
     public static class Forcombiner extends Reducer<Text,AvgEntity,Text,AvgEntity>{
         @Override
         protected void reduce(Text key, Iterable<AvgEntity> values, Context context) throws IOException, InterruptedException {
