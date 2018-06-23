@@ -1,7 +1,7 @@
 package Practice;
 
 
-import Util.laodai.JobUtil;
+import Util.JobUtil;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;

@@ -73,23 +73,12 @@ public class ForReduceJoinMR {
             }
 
             if (joinType.equals("IN")) {
-                if (orderList.size() <= productList.size()) {
+                for (Info list : productList) {
                     for (Info order : orderList) {
-                        for (Info list : productList) {
-                            order.setProductName(list.getProductName());
-                            order.setProductId(list.getProductId());
-                            order.setPrice(list.getPrice());
-                            context.write(order, NullWritable.get());
-                        }
-                    }
-                } else {
-                    for (Info list : productList) {
-                        for (Info order : orderList) {
-                            list.setOrderNum(order.getOrderNum());
-                            list.setOrderId(order.getOrderId());
-                            list.setOrderTime(order.getOrderTime());
-                            context.write(list, NullWritable.get());
-                        }
+                        list.setOrderNum(order.getOrderNum());
+                        list.setOrderId(order.getOrderId());
+                        list.setOrderTime(order.getOrderTime());
+                        context.write(list, NullWritable.get());
                     }
                 }
             } else if (joinType.equals("LEFT")) {//product
@@ -131,7 +120,7 @@ public class ForReduceJoinMR {
 
     public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
         Job job = Job.getInstance();
-        job.getConfiguration().set("demo.join", "LEFT");
+        job.getConfiguration().set("demo.join", "IN");
         job.setMapperClass(Formapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Info.class);
