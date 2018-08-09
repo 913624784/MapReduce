@@ -1,17 +1,18 @@
 package Join;
 
-
-import Util.JobUtil;
-import org.apache.commons.beanutils.BeanUtils;
+import Util.ClearOutPut;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ForReduceJoinMR {
     public static class Formapper extends Mapper<LongWritable, Text, Text, Info> {
         private Text okey = new Text();
         private Info ovalue = new Info();
+
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String line = value.toString();
@@ -35,7 +37,8 @@ public class ForReduceJoinMR {
                 ovalue.setOrderId(Integer.parseInt(fields[0]));//编号
                 ovalue.setOrderNum(Integer.parseInt(fields[2]));//数量
                 ovalue.setOrderTime(fields[1]);//日期
-                ovalue.setFlag(true);  // 标记 位设置好
+                ovalue.setOrderpid(Integer.parseInt(fields[3]));//order表商品id
+                ovalue.setFlag(true);  // 标记
             } else if ("product.txt".equals(fileName)) {
                 // 读到的product的文件
                 okey.set(fields[0]);//id
@@ -54,40 +57,81 @@ public class ForReduceJoinMR {
             context.write(okey, ovalue);
         }
     }
+
     public static class Forreducer extends Reducer<Text, Info, Info, NullWritable> {
         @Override
         protected void reduce(Text key, Iterable<Info> values, Context context) throws IOException, InterruptedException {
-            Info product = new Info();
+            String joinType = context.getConfiguration().get("demo.join");
             List<Info> orderList = new ArrayList<>();
+            List<Info> productList = new ArrayList<>();
             for (Info info : values) {//此时的info是混乱的 混搭的
-                try {
-                    if (info.isFlag()) {// order
-                        Info order = new Info();
-                        //  复制相同属性的工具方法 Apache提供的 复制上面的有的属性 相当于get后又set
-                        BeanUtils.copyProperties(order, info);
-                        orderList.add(order);//装入 order 集合
-                    } else { // product
-                        BeanUtils.copyProperties(product, info);
-                    }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                if (info.isFlag()) {// order
+                    orderList.add(info.clone());//装入 order 集合
+                } else { // product
+                    productList.add(info.clone());
                 }
             }
-            for (Info order : orderList) {
-                order.setProductName(product.getProductName());
-                order.setProductId(product.getProductId());
-                order.setPrice(product.getPrice());
-                context.write(order, NullWritable.get());
-            }
 
+            if (joinType.equals("IN")) {
+                for (Info list : productList) {
+                    for (Info order : orderList) {
+                        list.setOrderNum(order.getOrderNum());
+                        list.setOrderId(order.getOrderId());
+                        list.setOrderTime(order.getOrderTime());
+                        context.write(list, NullWritable.get());
+                    }
+                }
+            } else if (joinType.equals("LEFT")) {//product
+                for (Info list : productList) {
+                    for (Info order : orderList) {
+                        list.setOrderId(order.getOrderId());
+                        list.setOrderNum(order.getOrderNum());
+                        list.setOrderTime(order.getOrderTime());
+                        context.write(list, NullWritable.get());
+                    }
+                    if (list.getOrderId() == 0) {
+                        list.setOrderId(0);
+                        list.setOrderNum(0);
+                        list.setOrderTime(null);
+                        context.write(list, NullWritable.get());
+                    }
+                }
+            } else if (joinType.equals("RIGHT")) {//order
+                for (Info order : orderList) {
+                    for (Info list : productList) {
+                        order.setPrice(list.getPrice());
+                        order.setProductId(list.getProductId());
+                        order.setProductName(list.getProductName());
+                        context.write(order, NullWritable.get());
+                    }
+                    if (order.getPrice() == 0) {
+                        order.setPrice(0);
+                        order.setProductId(String.valueOf(order.getOrderpid()));
+                        order.setProductName(null);
+                        context.write(order, NullWritable.get());
+                    }
+                }
+            } else {
+                throw new RuntimeException("joinTypes is wrong");
+            }
 
         }
     }
 
-    public static void main(String[] args) {
-        JobUtil.commitJob(ForReduceJoinMR.class,"E:\\forTestData\\jionData\\reduce","");
+    public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
+        Job job = Job.getInstance();
+        job.getConfiguration().set("demo.join", "IN");
+        job.setMapperClass(Formapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Info.class);
+        job.setReducerClass(Forreducer.class);
+        job.setOutputKeyClass(Info.class);
+        job.setOutputValueClass(NullWritable.class);
+        String path = "E://output";
+        FileInputFormat.setInputPaths(job, new Path("E://jionData//reduce"));
+        ClearOutPut.clear(path);
+        FileOutputFormat.setOutputPath(job, new Path(path));
+        job.waitForCompletion(true);
     }
 
 }

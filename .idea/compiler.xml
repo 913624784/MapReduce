@@ -6,12 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="HBase" />
+        <module name="Hive" />
+        <module name="PhoneSystem" />
         <module name="Practice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="HBase" target="1.8" />
+      <module name="Hive" target="1.8" />
       <module name="MapReduce" target="1.8" />
+      <module name="PhoneSystem" target="1.8" />
       <module name="Practice" target="1.8" />
       <module name="Protobuf" target="1.7" />
       <module name="Yaml" target="1.7" />
