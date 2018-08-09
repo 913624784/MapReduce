@@ -15,23 +15,23 @@ public class SmalRecordReader extends RecordReader<Text,Text> {
 
     private Text key = new Text();
     private Text value = new Text();
-    private boolean isFinish;
-    private CombineFileSplit split;
+    private boolean isFinish;//返回当前状态 是否完成分片
+    private CombineFileSplit split;//**
     private FSDataInputStream inputStream;
-    private TaskAttemptContext context;
-    private Integer currentIndex;
+    private TaskAttemptContext context;//**
+    private Integer currentIndex;//**
 
     public SmalRecordReader(CombineFileSplit split, TaskAttemptContext context, Integer currentIndex) {
         this.split = split;
         this.context = context;
         this.currentIndex = currentIndex;
     }
-
+    //指定一个空的构造器
     public SmalRecordReader() {
 
     }
 
-    @Override
+    @Override//初始化
     public void initialize(InputSplit split, TaskAttemptContext context) throws IOException, InterruptedException {
 
     }
@@ -45,7 +45,7 @@ public class SmalRecordReader extends RecordReader<Text,Text> {
      */
     @Override
     public boolean nextKeyValue() throws IOException, InterruptedException {
-        if (!isFinish) {
+        if (!isFinish) {//如果true
             Path path = split.getPath(currentIndex);
             String fileName = path.getName();
             key.set(fileName);// 把文件名作为key

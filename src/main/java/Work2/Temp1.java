@@ -39,7 +39,7 @@ public class Temp1 {
 
     public static void main(String[] args) {
         JobUtil.commitJob(Temp1.class,
-                "F:\\1703\\大数据\\ForMR0123\\MapReduce基础编程 练习题及答案\\MapReduce基础编程 练习题及答案\\MapReduce基础——网站微博数据统计分析\\数据"
+                "F:\\1703\\大数据\\------教学视频和代码------\\ForMR0123\\MapReduce基础编程 练习题及答案\\MapReduce基础编程 练习题及答案\\MapReduce基础——网站微博数据统计分析\\数据"
                 ,"");
     }
 

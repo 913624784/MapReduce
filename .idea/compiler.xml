@@ -13,6 +13,8 @@
       <module name="HBase" target="1.8" />
       <module name="MapReduce" target="1.8" />
       <module name="Practice" target="1.8" />
+      <module name="Protobuf" target="1.7" />
+      <module name="Yaml" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.fusesource.leveldbjni:leveldbjni-all:1.8">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../大数据/apache-maven-3.5.0-bin/MavenResponsitory/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8.jar!/" />
+      <root url="jar://D:/apache-maven-3.5.3/Maven/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../大数据/apache-maven-3.5.0-bin/MavenResponsitory/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8-javadoc.jar!/" />
+      <root url="jar://D:/apache-maven-3.5.3/Maven/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../大数据/apache-maven-3.5.0-bin/MavenResponsitory/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8-sources.jar!/" />
+      <root url="jar://D:/apache-maven-3.5.3/Maven/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

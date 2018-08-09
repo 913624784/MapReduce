@@ -15,7 +15,7 @@ public class FindFansMR {
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String strs [] =value.toString().split(":");
-            String forV=strs[0];//前面的人 本人
+            String forV=strs[0];//本人
             String friends [] =strs[1].split(",");//他关注的人
             for(String s: friends){
                 okey.set(s);

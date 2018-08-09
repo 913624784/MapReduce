@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.slf4j:slf4j-api:1.7.5">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../大数据/apache-maven-3.5.0-bin/MavenResponsitory/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar!/" />
+      <root url="jar://D:/apache-maven-3.5.3/Maven/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../大数据/apache-maven-3.5.0-bin/MavenResponsitory/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-javadoc.jar!/" />
+      <root url="jar://D:/apache-maven-3.5.3/Maven/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../大数据/apache-maven-3.5.0-bin/MavenResponsitory/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-sources.jar!/" />
+      <root url="jar://D:/apache-maven-3.5.3/Maven/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

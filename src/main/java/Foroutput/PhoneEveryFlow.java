@@ -11,7 +11,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 
-public class PhoneEveryFlow {
+public class    PhoneEveryFlow {
     public static class Formapper extends Mapper<LongWritable,Text,Text,Flow>{
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {

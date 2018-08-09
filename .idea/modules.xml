@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/../HBase/HBase.iml" filepath="$PROJECT_DIR$/../HBase/HBase.iml" />
       <module fileurl="file://$PROJECT_DIR$/MapReduce.iml" filepath="$PROJECT_DIR$/MapReduce.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Practice/Practice.iml" filepath="$PROJECT_DIR$/../Practice/Practice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Protobuf/Protobuf.iml" filepath="$PROJECT_DIR$/../Protobuf/Protobuf.iml" />
     </modules>
   </component>
 </project>
